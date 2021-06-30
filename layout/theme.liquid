@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'application.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
 
@@ -17,9 +16,18 @@
 
   <main role="main">
     {{ content_for_layout }}
+    
+    {% include 'footer' %}
   </main>
-
-  {% include 'footer' %}
-
+  {{ "jquery-3.3.1.min.js" | asset_url | script_tag }}
+ 
+  {% if settings.show_multiple_currencies %}
+    {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
+    {{ "jquery.currencies.min.js" | asset_url | script_tag }}
+  {% endif %}
+ 
+  {% include 'currencies' %}
+ 
+  {{ 'application.js' | asset_url | script_tag }}
 </body>
 </html>
