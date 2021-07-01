@@ -39,6 +39,9 @@
       <button type="submit" name="update">Update</button>
       <button type="submit" name="checkout">Checkout</button>
     </div>
+    <p class="js-cart-currency-note">
+        {{ 'cart.filled.currency_note_html' | t: currency: shop.currency }}
+    </p>
   </form>
 {% else %}
   <h2>cart</h2>
