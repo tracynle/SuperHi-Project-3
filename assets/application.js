@@ -46,7 +46,7 @@ $(document).ready(function() {
       onCurrencyChanged: function(event) {
         let
           newCurrency = $(this).val(),
-          $otherPickers = $(currencyPickerSelector).not($(this));
+          $otherPickers = $(currencyPickerSelector).not($(this)); // returns other currency pickers that has not be changed
   
         Currency.convertAll(Currency.currentCurrency, newCurrency);
         currencyPicker.setCurrencyText(newCurrency);
@@ -77,13 +77,13 @@ $(document).ready(function() {
         Currency.convertAll(shopCurrency, Currency.currentCurrency);
         currencyPicker.setCurrencyText();
       },
-      init: function() {
+      init: function() { // initializes all our currency functions
         if (showMultipleCurrencies !== true) {
           return false;
         }
   
         currencyPicker.loadCurrency();
-  
+        // listens for the currency picker changes
         $(document).on('change', currencyPickerSelector, currencyPicker.onCurrencyChanged);
       }
     };
