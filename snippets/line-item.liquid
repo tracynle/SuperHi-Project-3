@@ -1,0 +1,23 @@
+<tr>
+    <td>
+        <a href="{{ item.url | within: collections.all }}">
+            <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+        </a>
+    </td>
+    <td>
+        <a href="{{ item.url }}">{{ item.product.title }}</a>
+        {{ item.variant.title }}
+        <a class="js-remove-line" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+    </td>
+    <td>{{ item.price | money }}</td>
+    <td>
+        <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+        {% assign quantity_id = 'updates_' | append: item.key %}
+        {% include 'quantity-picker' with name: 'updates[]', id: quantity_id, value: item.quantity, min: 0, max: item.variant.inventory_quantity  %}
+    </td>
+    <td>
+        {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+        {{ item.line_price | money }}
+        {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+    </td>
+</tr>

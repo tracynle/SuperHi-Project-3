@@ -101,7 +101,7 @@ $(document).ready(function() {
         let
           $form = $(this).closest(addToCartFormSelector),
           selectedVariant = productForm.getActiveVariant($form);
-  
+        
         $form.trigger('form:change', [selectedVariant]);
       },
       getActiveVariant: function($form) {
@@ -115,12 +115,17 @@ $(document).ready(function() {
           },
           selectedVariant = null;
   
+        console.log(variants);
+        console.log(formData);
+        console.log(formOptions);
+        
         $.each(formData, function(index, item) {
           if (item.name.indexOf('option') !== -1) {
             formOptions[item.name] = item.value;
           }
         });
-  
+        
+        // get selected option's variants
         $.each(variants, function(index, variant) {
           if (variant.option1 === formOptions.option1 && variant.option2 === formOptions.option2 && variant.option3 === formOptions.option3) {
             selectedVariant = variant;
@@ -141,11 +146,17 @@ $(document).ready(function() {
           $price = $form.find('.js-price'),
           formattedVariantPrice,
           priceHtml;
-  
+        
+
+          console.log(canAddToCart);
+          console.log(selectedVariant);
+
         if (hasVariant) {
           formattedVariantPrice = '$' + (selectedVariant.price/100).toFixed(2);
-          priceHtml = '<span class="money">'+formattedVariantPrice+'</span>';
-          window.history.replaceState(null, null, '?variant='+selectedVariant.id);
+          console.log("formatted variant price: " + formattedVariantPrice);
+          priceHtml = '<span class="money">'+ formattedVariantPrice + '</span>';
+          window.history.replaceState(null, null, '?variant=' + selectedVariant.id);
+          console.log(priceHtml);
         }
         else {
           priceHtml = $price.attr('data-default-price');
@@ -162,6 +173,9 @@ $(document).ready(function() {
   
         $price.html(priceHtml);
         currencyPicker.onMoneySpanAdded();
+
+        console.log('FORM VALIDATE FUNCTION');
+        console.log(selectedVariant);
       },
       init: function() {
         $(document).on('change', productOptionSelector, productForm.onProductOptionChanged);
@@ -186,7 +200,16 @@ $(document).ready(function() {
           error: ajaxify.onError
         });
       },
+      onLineRemoved: function(event) {
+        event.preventDefault();
+
+        let 
+            $removeLink = $(this),
+            removeQuery = $removeLink.attr('href').split('change?')[1];
+            $.post('/cart/change.js', removeQuery, ajaxify.onCartUpdated, 'json');
+      },
       onCartUpdated: function() {
+        console.log('cart is updated');
         let
           $miniCartFieldset = $(miniCartContentsSelector + ' .js-cart-fieldset');
   
@@ -257,6 +280,7 @@ $(document).ready(function() {
       quantityFieldSelector = '.js-quantity-field',
       quantityButtonSelector = '.js-quantity-button',
       quantityPickerSelector = '.js-quantity-picker',
+      
       quantityPicker = {
         onButtonClick: function(event) {
           // alert('button clicked');
