@@ -1,5 +1,5 @@
 {% if value == blank %}
-{% assign value = 1 %}
+  {% assign value = 1 %}
 {% endif %}
 
 <div class="quantity-picker js-quantity-picker">
@@ -9,7 +9,9 @@
   <div class="option-fieldset">
 
     <div class="visually-hidden">
-      <input type="number" class="js-quantity-field {% if field_class != blank %}{{ field_class }}{% endif %}" id="{{ id }}" name="{{ name }}" value="{{ value }}" {% if min != blank %}min="{{ min }}"{% endif %} {% if max != blank %}max="{{ max }}"{% endif %}>
+      <input type="number" class="js-quantity-field" id="{{ id }}" name="{{ name }}" value="{{ value }}" {% if min != blank %} min="{{ min }}"{% endif %}
+      {% if max != blank %}max="{{ max }}" {% endif %}
+      >
     </div>
 
     <button class="quantity-button js-quantity-button minus" type="button" {% if value == min %}disabled{% endif %}>
