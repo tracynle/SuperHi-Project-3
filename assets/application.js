@@ -369,7 +369,6 @@ $(document).ready(function() {
         $form = $(this).closest('form'),
         $button = $form.find(searchSubmitSelector),
         shouldDisableButton = this.value.length === 0;
-
       $button.prop('disabled', shouldDisableButton);
 
     };

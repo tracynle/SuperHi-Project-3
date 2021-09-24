@@ -1,9 +1,5 @@
 {% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
-
+ {% include 'search-form' %}
   {% if search.performed %}
     {% for item in search.results %}
       {% if item.featured_image %}
