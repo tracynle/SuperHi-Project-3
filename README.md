@@ -5,6 +5,6 @@
  - Complex variant selection
  - Curreny Switching
 
-+## Commands
+## Commands
 `theme watch --allow-live flag` -will watch and auto-deploy new file changes to the theme.
  

@@ -11,9 +11,10 @@
     </td>
     <td>{{ item.price | money }}</td>
     <td>
-        <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+        <!-- <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0"> -->
         {% assign quantity_id = 'updates_' | append: item.key %}
-        {% include 'quantity-picker' with name: 'updates[]', id: quantity_id, value: item.quantity, min: 0, max: item.variant.inventory_quantity  %}
+        {% include 'quantity-picker' with name: 'updates[]', id: quantity_id, value: item.quantity, min: 0, 
+        max: item.variant.inventory_quantity, field_class: 'js-line-quantity'  %}
     </td>
     <td>
         {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}

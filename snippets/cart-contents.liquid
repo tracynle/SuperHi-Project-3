@@ -1,27 +1,29 @@
 {% if cart.item_count > 0 %}
   <h1>cart</h1>
   <form action="/cart" method="post" novalidate>
-    <table>
-      <thead>
-        <th colspan="2">Prod</th>
-        <th>Price</th>
-        <th>Qty</th>
-        <th>total</th>
-      </thead>
-      <tbody>
-        {% for item in cart.items %}
-            {% include 'line-item' %}
-        {% endfor %}
-      </tbody>
-    </table>
-    <div>
-      <p>sub total : {{ cart.total_price | money }}</p>
-      <button type="submit" name="update">Update</button>
-      <button type="submit" name="checkout">Checkout</button>
-    </div>
-    <p class="js-cart-currency-note">
-        {{ 'cart.filled.currency_note_html' | t: currency: shop.currency }}
-    </p>
+    <fieldset id="cart-fieldset" class="js-cart-fieldset">
+      <table>
+        <thead>
+          <th colspan="2">Prod</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>total</th>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+              {% include 'line-item' %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <div>
+        <p>sub total : {{ cart.total_price | money }}</p>
+        <button type="submit" name="update">Update</button>
+        <button type="submit" name="checkout">Checkout</button>
+      </div>
+      <p class="js-cart-currency-note">
+          {{ 'cart.filled.currency_note_html' | t: currency: shop.currency }}
+      </p>
+    </fieldset>
   </form>
 {% else %}
   <h2>cart</h2>
