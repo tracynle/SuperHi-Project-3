@@ -1,4 +1,7 @@
 <div id="page-cart">
+    {% if cart.item_count > 0 %}
+        <h1>{{ 'cart.filled.title' | t }}</h1>
+    {% endif %}
     <div class="js-cart-page-contents" data-cart-item-count="{{ cart.item_count }}">
         {% include 'cart-contents' %}
     </div>

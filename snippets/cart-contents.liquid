@@ -1,31 +1,30 @@
-{% if cart.item_count > 0 %}
-  <h1>cart</h1>
-  <form action="/cart" method="post" novalidate>
-    <fieldset id="cart-fieldset" class="js-cart-fieldset">
-      <table>
-        <thead>
-          <th colspan="2">Prod</th>
-          <th>Price</th>
-          <th>Qty</th>
-          <th>total</th>
-        </thead>
-        <tbody>
+<div class="cart-contents">
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate>
+      <fieldset id="cart-fieldset" class="js-cart-fieldset">
+        <div class="cart-lines">
           {% for item in cart.items %}
-              {% include 'line-item' %}
+            {% include 'line-item' %}
           {% endfor %}
-        </tbody>
-      </table>
-      <div>
-        <p>sub total : {{ cart.total_price | money }}</p>
-        <button type="submit" name="update">Update</button>
-        <button type="submit" name="checkout">Checkout</button>
-      </div>
-      <p class="js-cart-currency-note">
+        </div>
+        <div class="cart-totals">
+          <div class="subtotal-line">
+            <h3>{{ 'cart.filled.subtotal' | t }}</h3>
+            <span class="price">{{ cart.total_price | money }}</span>
+          </div>
+          <div class="cart-buttons">
+            <button class="update-button" type="submit" name="update">{{ 'cart.filled.update' | t }}</button>
+            <button class="button-cta" type="submit" name="checkout">{{ 'cart.filled.button' | t }}</button>
+          </div>
+        </div>
+
+        <p class="currency-note js-cart-currency-note">
           {{ 'cart.filled.currency_note_html' | t: currency: shop.currency }}
-      </p>
-    </fieldset>
-  </form>
-{% else %}
-  <h2>cart</h2>
-  Cart is empty
-{% endif %}
+        </p>
+      </fieldset>
+    </form>
+  {% else %}
+    <p class="cart-empty-text ta-center">{{ 'cart.empty.title' | t }}</p>
+    <a href="/" class="button keep-shopping js-keep-shopping">{{ 'cart.empty.button' | t }}</a>
+  {% endif %}
+</div>
