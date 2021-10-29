@@ -90,9 +90,9 @@
 
 <div class="slideshow-wrap js-section-slideshow" data-autoplay="{{ section.settings.autoplay }}" data-autoplay-speed="{{ section.settings.autoplay_speed }}">
   
-  <!-- {% if section.blocks.size > 1 %}
+  {% if section.blocks.size > 1 %}
     {% include 'slider-buttons' %}
-  {% endif %} -->
+  {% endif %}
 
   <div class="slides js-slides">
     {% for block in section.blocks %}

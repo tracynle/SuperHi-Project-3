@@ -267,7 +267,7 @@ $(document).ready(function() {
           quantityValue = parseInt($quantity.val()),
           max = $quantity.attr('max') ? parseInt($quantity.attr('max')) : null;
 
-        if ($button.hasClass('plus') && (max === null || quantityValue + 1 <= max)) {
+        if ($button.hasClass('plus') && (max === null || quantityValue+1 <= max)) {
           // do something for plus click
           $quantity.val(quantityValue + 1).change();
         }
@@ -281,7 +281,7 @@ $(document).ready(function() {
           $field = $(this),
           $picker = $field.closest(quantityPickerSelector),
           $quantityText = $picker.find('.js-quantity-text'),
-          shouldDisableMinus = parseInt(this.value) === parseInt($field.attr('min')), 
+          shouldDisableMinus = parseInt(this.value) === parseInt($field.attr('min')),
           shouldDisablePlus = parseInt(this.value) === parseInt($field.attr('max')),
           $minusButton = $picker.find('.js-quantity-button.minus'),
           $plusButton = $picker.find('.js-quantity-button.plus');
@@ -369,6 +369,7 @@ $(document).ready(function() {
         $form = $(this).closest('form'),
         $button = $form.find(searchSubmitSelector),
         shouldDisableButton = this.value.length === 0;
+
       $button.prop('disabled', shouldDisableButton);
 
     };
