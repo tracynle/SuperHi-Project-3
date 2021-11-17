@@ -1,9 +1,1 @@
-<div id="page-404">
-    <h2>{{ 'general.404.error_code' | t }}</h2>
-    {% assign search_label = 'general.404.title' | t %}
-    {% include 'search-form' with label: search_label %}
-
-    <a href="/" class="button">
-        {{ 'general.404.back' | t }}
-    </a>
-</div>
+{% include 'error-404' %}

@@ -18,7 +18,7 @@
           {% assign filled_singular = 'search.results.filled_singular' | t %}
           {% assign filled_plural = 'search.results.filled_plural' | t %}
 
-          <h2>{{ product_count }} {{ product_count | pluralize: filled_singular, filled_plural }}</h2>
+          <h1>{{ product_count }} {{ product_count | pluralize: filled_singular, filled_plural }}</h1>
           
           <div class="results-grid grid two-columns">
             {% for item in search.results %}
